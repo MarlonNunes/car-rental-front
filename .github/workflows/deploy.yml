@@ -1,0 +1,73 @@
+name: car-rental-angular application deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.5'
+
+      - name: Install dependencies
+        uses: npm install
+
+      - name: Build
+        run: ng build --prod
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Zip files
+        run: zip -r car-rental-angular.zip dist/ appspec.yml scripts/
+
+      - name: Upload to S3
+        run: aws s3 cp car-rental-angular.zip s3://car-renta-deploy/deploy/frontend/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Create deployment
+        run: |
+          OUTPUT=$(aws deploy create-deployment \
+            --application-name car-rental \
+            --deployment-group-name car-rental-front-group \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --s3-location bucket=car-renta-deploy,key=deploy/frontend/car-rental-angular.zip,bundleType=zip)
+          echo "deployment_id=$(echo $OUTPUT | jq -r .deploymentId)" >> $GITHUB_ENV
+
+      - name: Wait for deployment completion
+        run: |
+          DEPLOYMENT_ID=$deployment_id
+          while true; do
+            STATUS=$(aws deploy get-deployment --deployment-id $DEPLOYMENT_ID | jq -r .deploymentInfo.status)
+            echo "Deployment status: $STATUS"
+            if [[ "$STATUS" == "Succeeded" ]]; then
+              echo "Deployment succeeded."
+              break
+            elif [[ "$STATUS" == "Failed" || "$STATUS" == "Stopped" ]]; then
+              echo "Deployment failed."
+              exit 1
+            fi
+              sleep 30
+          done
