@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         this.router.navigateByUrl("/home");
       },
       error: (error) => {
+        console.error(error);
         if(error.status == 401){
           this.toastr.warning("E-mail e/ou senha inválidos");
         }else{
