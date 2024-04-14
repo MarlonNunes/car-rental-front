@@ -18,7 +18,7 @@ jobs:
           node-version: 20.5
 
       - name: Install dependencies
-        uses: npm install
+        run: npm install
 
       - name: Build
         run: ng build --prod
