@@ -1,12 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'ngx-toastr/toastr';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
-@import 'ngx-toastr/toastr-bs5-alert';
+@import "ngx-toastr/toastr";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "ngx-toastr/toastr-bs5-alert";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.login-background{
-    background-color: #CD1D46;
+@font-face {
+  font-family: "Roboto";
+  src: url(./assets/font/Roboto/Roboto-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url(./assets/font/Roboto/Roboto-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --primary: #802BB1;
+  --secondary: #2D283E;
+  --tertiary: #564F6F;
+  --quaternary: #4C495D;
+  --quinary: #D1D7E0;
+  --text-dar: #222222;
+  --text-white: #ffffff;
+  --text-cream: #eee0e0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+.login-background {
+  background-color: var(--secondary);
+}
+
+.mat-mdc-fab.mat-accent {
+  --mdc-fab-container-color: var(--primary) !important;
+}
+
+.mdc-fab {
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.btn-primary {
+    background-color: var(--primary) !important;
+    --bs-btn-bg: var(--primary) !important;
+    --bs-btn-border-color: var(--primary) !important;
+    --bs-btn-hover-bg: var(--primary) !important;
+    --bs-btn-hover-border-color: var(--primary) !important;
+    --bs-btn-active-bg: var(--primary) !important;
+    --bs-btn-disabled-bg: var(--primary) !important;
+    --bs-btn-disabled-border-color: var(--primary) !important;
+}
+
+.btn-secondary {
+    background-color: var(--secondary) !important;
+    --bs-btn-bg: var(--secondary) !important;
+    --bs-btn-border-color: var(--secondary) !important;
+    --bs-btn-hover-bg: var(--secondary) !important;
+    --bs-btn-hover-border-color: var(--secondary) !important;
+    --bs-btn-active-bg: var(--secondary) !important;
+    --bs-btn-disabled-bg: var(--secondary) !important;
+    --bs-btn-disabled-border-color: var(--secondary) !important;
+}
+
+.btn-tertiary {
+  background-color: var(--tertiary) !important;
+  --bs-btn-bg: var(--tertiary) !important;
+  --bs-btn-border-color: var(--tertiary) !important;
+  --bs-btn-hover-bg: var(--tertiary) !important;
+  --bs-btn-hover-border-color: var(--tertiary) !important;
+  --bs-btn-active-bg: var(--tertiary) !important;
+  --bs-btn-disabled-bg: var(--tertiary) !important;
+  --bs-btn-disabled-border-color: var(--tertiary) !important;
+}
+
+.btn-quaternary {
+    background-color: var(--quaternary) !important;
+    --bs-btn-bg: var(--quaternary) !important;
+    --bs-btn-border-color: var(--quaternary) !important;
+    --bs-btn-hover-bg: var(--quaternary) !important;
+    --bs-btn-hover-border-color: var(--quaternary) !important;
+    --bs-btn-active-bg: var(--quaternary) !important;
+    --bs-btn-disabled-bg: var(--quaternary) !important;
+    --bs-btn-disabled-border-color: var(--quaternary) !important;
+}
+
+.btn-quinary {
+    background-color: var(--quinary) !important;
+    --bs-btn-bg: var(--quinary) !important;
+    --bs-btn-border-color: var(--quinary) !important;
+    --bs-btn-hover-bg: var(--quinary) !important;
+    --bs-btn-hover-border-color: var(--quinary) !important;
+    --bs-btn-active-bg: var(--quinary) !important;
+    --bs-btn-disabled-bg: var(--quinary) !important;
+    --bs-btn-disabled-border-color: var(--quinary) !important;
+}
+
+.page-title{
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.mat-icon{
+    color: var(--primary)
 }

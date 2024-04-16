@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -32,6 +32,30 @@ export class AuthenticationService {
         this.storeTokens(response.access_token, response.refresh_token, response.expires_in)
       })
     );
+  }
+
+  refreshToken() {
+    const refreshToken = localStorage.getItem(this.refreshTokenKey) || "";
+    const body = new HttpParams()
+      .set('refresh_token', refreshToken)
+      .set('grant_type', this.refreshTokenKey)
+      .set('client_id', env.keycloakClientId);
+
+      console.log("chegou no http");
+    return this.http.post(env.keycloakTokenUrl, body.toString(), {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }).pipe(
+      tap((response: any) => {
+        console.log("Refresh token received:", response);
+        this.storeTokens(response.access_token, response.refresh_token, response.expires_in);
+      })
+    );
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.accessTokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
+    localStorage.removeItem(this.expireInKey);
   }
 
   private storeTokens(accessToken: string, refreshToken: string, expiresIn: number): void {

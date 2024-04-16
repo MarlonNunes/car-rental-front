@@ -1,0 +1,16 @@
+<div class="row mb-5 align-items-center justify-content-between">
+    <div class="page-title col-lg-8">
+        {{title}}
+    </div>
+
+    @if(hasButton){
+        <div class="col-lg-4">
+            <button class="btn btn-primary float-end" (click)="buttonClick.emit()">
+                {{textButton}}
+                @if(hasIcon){
+                    <mat-icon class="mat-icon-custom" aria-hidden="false" [fontIcon]="icon"></mat-icon>
+                }
+            </button>
+        </div>
+    }
+</div>

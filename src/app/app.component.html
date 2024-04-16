@@ -1,3 +1,18 @@
-<div class="container">
-  <router-outlet />
-</div>
+<mat-drawer-container style="height: 100%;">
+  <mat-drawer mode="side" #drawer class="sidenav">
+    <app-side-bar (toggleDrawer)="drawer.toggle()"></app-side-bar>
+  </mat-drawer>
+  <mat-drawer-content>
+    @if(!isLoginPage){
+      <button style="position: fixed; top: 50vh;"
+        mat-fab
+        (click)="drawer.toggle()"
+      >
+      <mat-icon class="mat-icon-rtl-mirror"> {{drawer.opened ? 'expand_more' : 'chevron_right' }} </mat-icon>
+      </button>
+    }
+    <div class="main-content" [ngClass]="{'login': isLoginPage}">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

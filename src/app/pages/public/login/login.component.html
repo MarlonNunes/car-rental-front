@@ -2,7 +2,7 @@
   <div class="row justify-content-md-center align-items-center" style="min-height: 100vh;">
     <!-- Centralização vertical e horizontal -->
     <div class="col-md-6 login-box">
-      <h1 class="text-center">Login</h1>
+      <h1 class="text-center">BEM VINDO</h1>
       <hr>
       <form [formGroup]="loginForm" (submit)="onSubmit()">
         <div class="mb-3">
@@ -13,9 +13,10 @@
           <label class="form-label">Senha</label>
           <input type="password" class="form-control" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-danger text-center w-100 d-flex align-items-center justify-content-center"
+        <button type="submit"
+          class="btn btn-quaternary text-center w-100 d-flex align-items-center justify-content-center"
           [disabled]="loading">
-          <span>LOGIN</span>
+          <span style="color: #000">LOGIN</span>
           @if (loading) {
           <mat-spinner [diameter]="20"></mat-spinner>
           }

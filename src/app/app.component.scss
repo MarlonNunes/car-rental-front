@@ -1,0 +1,21 @@
+.main-content {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px;
+
+  &:not(.login){
+    margin-left: 20px;
+  }
+
+  &.login {
+    background-color: var(--secondary);
+  }
+}
+
+.sidenav {
+  min-height: 100vh;
+}
+
+.mat-icon{
+  color: #fff;
+}

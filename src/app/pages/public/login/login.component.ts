@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
-    localStorage.removeItem("access_token");
   }
 
   ngOnInit(): void {

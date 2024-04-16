@@ -1,0 +1,52 @@
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: var(--secondary);
+  color: var(--text-cream);
+  padding: 20px;
+  box-sizing: border-box;
+
+  .title{
+    color: var(--text-white);
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+  }
+
+  .tree {
+    background-color: transparent !important;
+    
+    .mat-tree-node{
+      font-weight: 600;
+      color: var(--text-white);
+
+      &.cdk-tree-node{
+        color: var(--text-cream);
+        font-weight: 400;
+      }
+    }
+  }
+  .tree-invisible {
+    display: none;
+  }
+  
+  .tree ul,
+  .tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  .tree .mat-nested-tree-node div[role="group"] {
+    padding-left: 40px;
+  }
+  .tree div[role="group"] > .mat-tree-node {
+    padding-left: 40px;
+  }
+  
+}
+
+.mat-icon{
+  color: #fff;
+}
