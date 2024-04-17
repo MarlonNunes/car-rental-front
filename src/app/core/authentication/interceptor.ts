@@ -20,7 +20,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         // Unauthorized - JWT Token expired    
         return authService.refreshToken().pipe(
           switchMap((tokenReceived) => {
-            console.log(tokenReceived);
             let token: String = tokenReceived.access_token;
             if (token != '') {
               req = req.clone({

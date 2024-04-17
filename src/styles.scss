@@ -20,14 +20,18 @@
 }
 
 :root {
-  --primary: #802BB1;
-  --secondary: #2D283E;
-  --tertiary: #564F6F;
-  --quaternary: #4C495D;
-  --quinary: #D1D7E0;
+  --primary: #802bb1;
+  --secondary: #2d283e;
+  --tertiary: #564f6f;
+  --quaternary: #4c495d;
+  --quinary: #d1d7e0;
   --text-dar: #222222;
   --text-white: #ffffff;
   --text-cream: #eee0e0;
+  --mdc-checkbox-selected-focus-icon-color: var(--primary);
+  --mdc-checkbox-selected-hover-icon-color:var(--primary);
+  --mdc-checkbox-selected-icon-color: var(--primary);
+  --mdc-checkbox-selected-pressed-icon-color: var(--primary);
 }
 
 html,
@@ -52,25 +56,25 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--primary) !important;
-    --bs-btn-bg: var(--primary) !important;
-    --bs-btn-border-color: var(--primary) !important;
-    --bs-btn-hover-bg: var(--primary) !important;
-    --bs-btn-hover-border-color: var(--primary) !important;
-    --bs-btn-active-bg: var(--primary) !important;
-    --bs-btn-disabled-bg: var(--primary) !important;
-    --bs-btn-disabled-border-color: var(--primary) !important;
+  background-color: var(--primary) !important;
+  --bs-btn-bg: var(--primary) !important;
+  --bs-btn-border-color: var(--primary) !important;
+  --bs-btn-hover-bg: var(--primary) !important;
+  --bs-btn-hover-border-color: var(--primary) !important;
+  --bs-btn-active-bg: var(--primary) !important;
+  --bs-btn-disabled-bg: var(--primary) !important;
+  --bs-btn-disabled-border-color: var(--primary) !important;
 }
 
 .btn-secondary {
-    background-color: var(--secondary) !important;
-    --bs-btn-bg: var(--secondary) !important;
-    --bs-btn-border-color: var(--secondary) !important;
-    --bs-btn-hover-bg: var(--secondary) !important;
-    --bs-btn-hover-border-color: var(--secondary) !important;
-    --bs-btn-active-bg: var(--secondary) !important;
-    --bs-btn-disabled-bg: var(--secondary) !important;
-    --bs-btn-disabled-border-color: var(--secondary) !important;
+  background-color: var(--secondary) !important;
+  --bs-btn-bg: var(--secondary) !important;
+  --bs-btn-border-color: var(--secondary) !important;
+  --bs-btn-hover-bg: var(--secondary) !important;
+  --bs-btn-hover-border-color: var(--secondary) !important;
+  --bs-btn-active-bg: var(--secondary) !important;
+  --bs-btn-disabled-bg: var(--secondary) !important;
+  --bs-btn-disabled-border-color: var(--secondary) !important;
 }
 
 .btn-tertiary {
@@ -85,34 +89,51 @@ body {
 }
 
 .btn-quaternary {
-    background-color: var(--quaternary) !important;
-    --bs-btn-bg: var(--quaternary) !important;
-    --bs-btn-border-color: var(--quaternary) !important;
-    --bs-btn-hover-bg: var(--quaternary) !important;
-    --bs-btn-hover-border-color: var(--quaternary) !important;
-    --bs-btn-active-bg: var(--quaternary) !important;
-    --bs-btn-disabled-bg: var(--quaternary) !important;
-    --bs-btn-disabled-border-color: var(--quaternary) !important;
+  background-color: var(--quaternary) !important;
+  --bs-btn-bg: var(--quaternary) !important;
+  --bs-btn-border-color: var(--quaternary) !important;
+  --bs-btn-hover-bg: var(--quaternary) !important;
+  --bs-btn-hover-border-color: var(--quaternary) !important;
+  --bs-btn-active-bg: var(--quaternary) !important;
+  --bs-btn-disabled-bg: var(--quaternary) !important;
+  --bs-btn-disabled-border-color: var(--quaternary) !important;
 }
 
 .btn-quinary {
-    background-color: var(--quinary) !important;
-    --bs-btn-bg: var(--quinary) !important;
-    --bs-btn-border-color: var(--quinary) !important;
-    --bs-btn-hover-bg: var(--quinary) !important;
-    --bs-btn-hover-border-color: var(--quinary) !important;
-    --bs-btn-active-bg: var(--quinary) !important;
-    --bs-btn-disabled-bg: var(--quinary) !important;
-    --bs-btn-disabled-border-color: var(--quinary) !important;
+  background-color: var(--quinary) !important;
+  --bs-btn-bg: var(--quinary) !important;
+  --bs-btn-border-color: var(--quinary) !important;
+  --bs-btn-hover-bg: var(--quinary) !important;
+  --bs-btn-hover-border-color: var(--quinary) !important;
+  --bs-btn-active-bg: var(--quinary) !important;
+  --bs-btn-disabled-bg: var(--quinary) !important;
+  --bs-btn-disabled-border-color: var(--quinary) !important;
 }
 
-.page-title{
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: var(--secondary);
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: var(--secondary);
 }
 
-.mat-icon{
-    color: var(--primary)
+.mat-icon {
+  color: var(--primary);
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--primary) !important;
+}
+
+:host ::ng-deep .mat-checkbox-indeterminate,
+.mat-checkbox-checked {
+  &.mat-primary .mat-checkbox-background {
+    background-color: var(--primary) !important;
+  }
+  &.mat-accent .mat-checkbox-background {
+    background-color: var(--primary) !important;
+  }
+  &.mat-warn .mat-checkbox-background {
+    background-color: var(--primary) !important;
+  }
 }

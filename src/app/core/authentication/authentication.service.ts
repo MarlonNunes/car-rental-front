@@ -41,12 +41,10 @@ export class AuthenticationService {
       .set('grant_type', this.refreshTokenKey)
       .set('client_id', env.keycloakClientId);
 
-      console.log("chegou no http");
     return this.http.post(env.keycloakTokenUrl, body.toString(), {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }).pipe(
       tap((response: any) => {
-        console.log("Refresh token received:", response);
         this.storeTokens(response.access_token, response.refresh_token, response.expires_in);
       })
     );

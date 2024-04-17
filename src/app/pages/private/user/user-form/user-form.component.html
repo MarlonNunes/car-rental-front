@@ -1,56 +1,62 @@
 <app-page-title [title]="pageTitle" />
 
-<form [formGroup]="form" (submit)="onSubmit()">
-    <div class="row">
-        <div class="col-4">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" formControlName="email">
-                @if(submit && email && email.invalid){
-                <div class="form-text text-danger">Você deve informar um email válido.</div>
-                }
+@if (loading) {
+    <div class="d-flex justify-content-center align-items-center">
+        <mat-spinner [diameter]="180"></mat-spinner>
+    </div>    
+}@else{
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    @if(submit && email && email.invalid){
+                    <div class="form-text text-danger">Você deve informar um email válido.</div>
+                    }
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" formControlName="firstName">
+                    @if(submit && firstName && firstName.invalid){
+                    <div class="form-text text-danger">Você deve informar um nome.</div>
+                    }
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <label class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" formControlName="lastName">
+                </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="mb-3">
-                <label class="form-label">Nome</label>
-                <input type="text" class="form-control" formControlName="firstName">
-                @if(submit && firstName && firstName.invalid){
-                <div class="form-text text-danger">Você deve informar um nome.</div>
-                }
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label class="form-label">CPF</label>
+                    <input type="email" class="form-control" formControlName="cpf">
+                    @if(submit && cpf && cpf.invalid){
+                    <div class="form-text text-danger">Você deve informar um CPF válido.</div>
+                    }
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="mb-3">
+                    <label class="form-label" style="margin-left: 10px">Permissões</label><br>
+                    @for (role of rolesOptions; track $index) {
+                        <mat-checkbox (change)="handleRoleChange($event)" [value]="role.id">{{role.description}}</mat-checkbox>
+                    }
+                </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="mb-3">
-                <label class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" formControlName="lastName">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <div class="mb-3">
-                <label class="form-label">CPF</label>
-                <input type="email" class="form-control" formControlName="cpf">
-                @if(submit && cpf && cpf.invalid){
-                <div class="form-text text-danger">Você deve informar um CPF válido.</div>
-                }
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="mb-3">
-                <label class="form-label" style="margin-left: 10px">Permissões</label><br>
-                @for (role of roles; track $index) {
-                    <mat-checkbox>{{role.name}}</mat-checkbox>
-                }
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-tertiary text-center w-100 d-flex align-items-center justify-content-center"
-        [disabled]="loading">
-        <span style="color: #fff">SALVAR</span>
-        @if (loading) {
-        <mat-spinner [diameter]="20"></mat-spinner>
-        }
-    </button>
-</form>
+        <button type="submit" class="btn btn-tertiary text-center w-100 d-flex align-items-center justify-content-center"
+            [disabled]="loading">
+            <span style="color: #fff">SALVAR</span>
+            @if (loading) {
+            <mat-spinner [diameter]="20"></mat-spinner>
+            }
+        </button>
+    </form>
+} 

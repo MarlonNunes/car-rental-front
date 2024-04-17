@@ -16,7 +16,7 @@ const TREE_DATA: FoodNode[] = [
   {
     name: "Administrador",
     children: [
-      {name: 'Relatórios'}, {name: "Lojas"}, {name: "Usuários", redirect: "/admin/user"}, 
+      {name: 'Relatórios'}, {name: "Lojas"}, {name: "Usuários", redirect: "/users/list"}, 
       ]
   },
   {

@@ -34,6 +34,6 @@ export class UserListComponent {
   }
 
   registerNewUser(id?: string){
-    this.router.navigateByUrl("/admin/new-user")
+    this.router.navigateByUrl("/users/register")
   }
 }
