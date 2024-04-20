@@ -18,8 +18,20 @@ export class RequestUser {
     keycloackId: string;
     firstName: string;
     lastName: string;
+    fullName: string;
     cpf: string;
     roles: Role[];
     enabled: boolean;
+  }
+
+  export interface SearchParams {
+    name?: string[];
+    email?: string[];
+    cpf?: string[];
+    id?: number[];
+    createdAtIni?: Date;
+    createdAtEnd?: Date;
+    page?: number;
+    pageSize?: number;
   }
   

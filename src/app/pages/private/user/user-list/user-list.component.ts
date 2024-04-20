@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { Route, Router } from '@angular/router';
 import { PageTitleComponent } from '../../../../core/components/page-title/page-title.component';
+import { UserManagementService } from '../../../../service/user-management.service';
+import { SearchParams, UserDTO } from '../../../../model/user';
+import { PageDTO } from '../../../../model/shared';
 
 @Component({
   selector: 'app-user-list',
@@ -13,24 +16,23 @@ import { PageTitleComponent } from '../../../../core/components/page-title/page-
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "email", "cpf",  "editar", "excluir"];
-  example = [
-    {id: 1, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 2, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 3, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 4, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 5, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 6, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 7, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 8, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 9, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"},
-    {id: 10, name: "Marlon Nunes", email: "marlonnunes869@gmail.com", cpf: "863.322.950-15"}
-  ]
+  userPage: PageDTO<UserDTO>;
 
   constructor(
-    private router: Router
+    private readonly router: Router,
+    private readonly service: UserManagementService
   ){
+  }
+  ngOnInit(): void {
+    this.search({});
+  }
+
+  private search(userFilter: SearchParams){
+    this.service.search(userFilter).subscribe({
+      next: resp => this.userPage = resp
+    });
   }
 
   registerNewUser(id?: string){
