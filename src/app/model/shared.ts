@@ -10,3 +10,16 @@ export interface PageDTO<T>{
     totalPages: number;
     totalElements: number;
 }
+
+export interface ViaCepDetails{
+    cep: string;
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
+    ibge: string;
+    gia: string;
+    ddd: string;
+    siafi: string;
+  }

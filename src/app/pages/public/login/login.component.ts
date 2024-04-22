@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit, OnDestroy{
     private toastr: ToastrService
     ){
 
+    if(authService.checkIfUserIsLogged()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]

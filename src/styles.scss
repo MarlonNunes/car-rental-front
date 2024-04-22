@@ -137,3 +137,13 @@ body {
     background-color: var(--primary) !important;
   }
 }
+
+.col-1-2{
+  flex: 0 0 auto;
+  width: 10.33333333%;
+}
+
+.col-1-5{
+  flex: 0 0 auto;
+  width: 12.33333333%;
+}

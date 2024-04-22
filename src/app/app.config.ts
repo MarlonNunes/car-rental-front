@@ -8,11 +8,17 @@ import { provideToastr } from 'ngx-toastr';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getCustomPaginator } from './core/configs/CustomPaginatorIntl';
 import { authInterceptor } from './core/authentication/interceptor';
+import { IConfig, provideEnvironmentNgxMask } from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
     provideAnimationsAsync(),
+    provideEnvironmentNgxMask(maskConfig),
     provideToastr(),
     provideHttpClient(
       withInterceptors([authInterceptor])

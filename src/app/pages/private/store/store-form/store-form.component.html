@@ -1,0 +1,115 @@
+<app-page-title title="Cadastro de loja" />
+
+@if(loading){
+
+}@else{
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" formControlName="legalName">
+                @if(submit && legalName && legalName.invalid){
+                <div class="form-text text-danger">Você deve informar um nome.</div>
+                }
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">CNPJ</label>
+                <input type="text" [mask]="'00.000.000/0000-00'" class="form-control" formControlName="cnpj">
+                @if(submit && cnpj && cnpj.invalid){
+                <div class="form-text text-danger">Você deve informar um CNPJ válido.</div>
+                }    
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Logo</label>
+                <input type="text" class="form-control" formControlName="logoUrl">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">CEP</label>
+                <input type="text" [mask]="'00000-000'" class="form-control" formControlName="zipCode">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">UF</label>
+                <input type="text" class="form-control" formControlName="state">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Cidade</label>
+                <input type="text" class="form-control" formControlName="city">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Bairro</label>
+                <input type="text" class="form-control" formControlName="district">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Endereço</label>
+                <input type="text" class="form-control" formControlName="addressStreet">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Número residencial</label>
+                <input #addressNumberInput type="text" class="form-control" formControlName="addressNumber">
+            </div>
+        </div>
+        <div class="col-1-2">
+            <div class="mb-3">
+                <label class="form-label">Contatos</label>
+                <select #typeSelect class="form-select" [class]="{'input-error': contactType?.pending}"
+                    formControlName="contactType">
+                    <option selected [value]="undefined">Tipo</option>
+                    <option value="PHONE_NUMBER">Telefone</option>
+                    <option value="WHATSAPP">Whatsapp</option>
+                    <option value="EMAIL">Email</option>
+                    <option value="INSTAGRAM">Instagram</option>
+                    <option value="FACEBOOK">Facebook</option>
+                    <option value="X">X</option>
+                    <option value="LINKEDIN">LinkedIn</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-2" style="margin-top: 27px;">
+            <div class="mb-3">
+                <input type="text" [class]="{'input-error': contactValue?.pending}" formControlName="contactValue"
+                    (blur)="changeContact()" (keydown.enter)="typeSelect.focus(); $event.preventDefault()"
+                    class="form-control" />
+            </div>
+        </div>
+        <div class="col-5" style="margin-top: 29px;" formArrayName="contacts">
+            @for (item of contacts.controls; track $index) {
+                @if(!item.get("disabled")?.value){
+                    <button class="btn-media-social" type="button">
+                        <i class="mr-4" [class]="icons[item.get('type')?.value]" style="font-size: 18px;"
+                            (click)="selectContact(item)"></i>
+                        <i class="fa-solid fa-x close-icon" (click)="removeContact($index, item)"></i>
+                    </button>
+                }
+            }
+        </div>
+    </div>
+    <button type="submit" class="btn btn-tertiary text-center w-100 d-flex align-items-center justify-content-center"
+        [disabled]="loading">
+        <span style="color: #fff">SALVAR</span>
+        @if (loading) {
+        <mat-spinner [diameter]="20"></mat-spinner>
+        }
+    </button>
+</form>
+}

@@ -56,6 +56,10 @@ export class AuthenticationService {
     localStorage.removeItem(this.expireInKey);
   }
 
+  checkIfUserIsLogged(): boolean {
+    return localStorage.getItem(this.accessTokenKey) != undefined && localStorage.getItem(this.refreshTokenKey) != undefined;
+  }
+
   private storeTokens(accessToken: string, refreshToken: string, expiresIn: number): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
     localStorage.setItem(this.refreshTokenKey, refreshToken);
