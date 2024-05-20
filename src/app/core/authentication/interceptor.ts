@@ -5,12 +5,15 @@ import { catchError, switchMap, throwError } from "rxjs";
 import { Router } from "@angular/router";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const isLoginEndpoint = req.url.includes("/login");
+  if(!isLoginEndpoint){
   const token = localStorage.getItem('access_token');
   req = req.clone({
     setHeaders: {
       Authorization: `Bearer ${token}`
     }
   });
+  }
 
   const authService = inject(AuthenticationService);
   const router = inject(Router);
@@ -18,7 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError(error => {
 
-      if (error.status === 401 && !req.url.includes("/login")) {
+      if (error.status === 401 && !isLoginEndpoint) {
         // Unauthorized - JWT Token expired    
         return authService.refreshToken().pipe(
           switchMap((tokenReceived) => {

@@ -7,10 +7,23 @@ import { UserFormComponent } from './pages/private/user/user-form/user-form.comp
 import { LogoutComponent } from './pages/public/logout/logout.component';
 import { StoreFormComponent } from './pages/private/store/store-form/store-form.component';
 import { StoreListComponent } from './pages/private/store/store-list/store-list.component';
+import { PasswordComponent } from './pages/public/password/password.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
-    {path: 'login', component: LoginComponent},
+    {
+        path: 'login', 
+        children: [
+            {
+                path: '',
+                component: LoginComponent,
+            },
+            {
+                path: 'create-password',
+                component: PasswordComponent
+            }
+        ]
+    },
     {path: 'logout', component: LogoutComponent},
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     {
