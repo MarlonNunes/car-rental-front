@@ -10,12 +10,14 @@ import { UserManagementService } from '../../../../service/user-management.servi
 import { IdName } from '../../../../model/shared';
 import { Role } from '../../../../model/admin';
 import { Router } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
   imports: [PageTitleComponent, ReactiveFormsModule, 
-    MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatCheckboxModule],
+    MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatSelectModule, NgxMaskDirective],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
 })
@@ -39,7 +41,7 @@ export class UserFormComponent {
       lastName: [''],
       cpf: ['', cpfValidator()],
       email: ['', [Validators.email, Validators.required]],
-      roles: this.fb.array([])
+      roleId: ['', [Validators.required]] 
     })
   }
 
@@ -66,32 +68,6 @@ export class UserFormComponent {
   get roles(): FormArray{
     return this.form.get('roles') as FormArray;
   }
-
-  handleRoleChange(event: MatCheckboxChange): void {
-    if(event.checked){
-      this.addRole(event.source.value);
-    }else{
-      this.removeRole(event.source.value);
-    }
-
-    console.log(this.roles);
-  }
-
-  private addRole(id: string): void{
-    const roles = this.roles;
-    const role = this.rolesOptions.find(r => r.id === id) as Role;
-    roles.push(this.fb.control({id: role.id, name: role.name}));
-  }
-
-  private removeRole(id: string): void{
-    const roles = this.roles;
-    const index = roles.value.findIndex((roleControl: any) => roleControl.role.id === id);
-    if(index > -1){
-      roles.removeAt(index);
-    }
-  }
-
-
 
   onSubmit(){
     this.submit = true
